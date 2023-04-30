@@ -74,8 +74,35 @@ while test $# -gt 0; do
             elif [ $1 == "proj" ]; then
                 shift
                 if [ $# -gt 0 ]; then
+                    LIB_NAME=$1
+
+                    installable_flag='false'
+                    docs_flag='false'
+                    verbose_flag='false'
+                    libs=''
+
+                    while test $# -gt 0; do
+                        shift
+                        case "$1" in
+                        -i) installable_flag='true' ;;
+                        -d) docs_flag='true' ;;
+                        -l)
+                            shift
+                            if test $# -gt 0; then
+                                export OUTPUT=$2
+                            else
+                                echo "no libs specified"
+                                exit 1
+                            fi
+                            echo "${OUTPUT}"
+                            shift
+                            ;;
+                        -v) verbose_flag='verbose' ;;
+                        *) ;;
+                        esac
+                    done
                     printf "Initializing ${bold}project${NORMAL} '${BLUE}$1${NC}'.\n"
-                    # initializeProject $3
+                    initializeProject $LIB_NAME $installable_flag $docs_flag $verbose_flag $libs
                 else
                     printf "${RED}Error:${NC} Name of the project not provided. Exiting.\n"
                 fi
@@ -87,6 +114,7 @@ while test $# -gt 0; do
             exit 1
         fi
         shift
+        exit 0
         ;;
     add)
         shift
