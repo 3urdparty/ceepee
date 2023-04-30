@@ -2,6 +2,7 @@ source ~/bin/ceepee/git_init.sh
 
 createGlobalLibraryCMake() {
     echo "cmake_minimum_required(VERSION 3.0.0)
+set (CMAKE_CXX_STANDARD 17)
 
 set(PROJECT_NAME
     $1
@@ -55,7 +56,7 @@ addLocalSublibrary() {
         else
 
             mkdir -p libs/$1/include/$1 libs/$1/src
-            touch libs/$1/include/$1/$1.hpp
+            createHeaderFile $1 > libs/$1/include/$1/$1.hpp
             echo "#include\"$1.hpp\"" >libs/$1/src/$1.cpp
             echo "cmake_minimum_required(VERSION 3.0.0)
 
@@ -123,8 +124,8 @@ initializeLibrary() {
 
 createHeaderFile() {
     local upper=$(tr '[a-z]' '[A-Z]' <<<$1)
-    echo "#ifndef ${upper}_H
-#define ${upper}_H
+    echo "#ifndef ${upper}_HPP
+#define ${upper}_HPP
 
 #endif"
 }

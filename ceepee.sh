@@ -6,8 +6,8 @@ source ~/bin/ceepee/proj_init.sh
 source ~/bin/ceepee/lib_init.sh
 
 if [ "$1" == "init" ]; then
-    if [ "$(ls -A $DIR)" ]; then
-        echo "Directory not empty. Please empty to continue"
+    if [ "$(ls -A $DIR)" ] && [ -e ./CMakeLists.txt ]; then
+        echo "Directory seems to contain a previous CMake Project. Please empty to continue."
     else
         if [ $# -gt 1 ] && [ $2 == "lib" ]; then
             if [ $# -gt 2 ]; then

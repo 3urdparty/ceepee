@@ -37,7 +37,11 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
+
+#vscode
+.vscode/
+
 #Build
 out/build/
-[Bb][Uu][Ii][Ll][Dd]"
+[Bb][Uu][Ii][Ll][Dd]/"
 }
