@@ -36,7 +36,7 @@ target_include_directories(\${LIBRARY_NAME} PRIVATE
 target_include_directories(\${LIBRARY_NAME} PUBLIC
     $<BUILD_INTERFACE:\${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
-
+)
 # To link other libraries in \$PATH add libraries to target_link_libraries
 target_link_libraries(\${MAIN_LIBRARY_NAME} \${MAIN_LIBRARIES})"
     if [ $2 == 'true' ]; then
