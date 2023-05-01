@@ -1,6 +1,6 @@
 createProjectLevelCMakeLists() {
     echo "
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.26.0)
 
 set(MAIN_PROJECT_NAME
     $1

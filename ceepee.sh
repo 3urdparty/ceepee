@@ -4,6 +4,7 @@ source ~/bin/ceepee/lib_init.sh
 
 docs_flag='false'
 installable_flag='false'
+tests_flag='false'
 libs=''
 verbose_flag='false'
 
@@ -39,7 +40,7 @@ while test $# -gt 0; do
                 if [ $# -gt 0 ]; then
 
                     LIB_NAME=$1
-
+                    tests_flag='false'
                     installable_flag='false'
                     docs_flag='false'
                     verbose_flag='false'
@@ -50,6 +51,7 @@ while test $# -gt 0; do
                         case "$1" in
                         -i) installable_flag='true' ;;
                         -d) docs_flag='true' ;;
+                        -t|--tests) tests_flag='true';;
                         -l)
                             shift
                             if test $# -gt 0; then
@@ -66,7 +68,7 @@ while test $# -gt 0; do
                         esac
                     done
 
-                    initializeLibrary $LIB_NAME $installable_flag $docs_flag $verbose_flag $libs
+                    initializeLibrary $LIB_NAME $installable_flag $docs_flag $tests_flag $libs $verbose_flag
                 else
                     printf "${RED}Error:${NC} Name of the library not provided. Please provide a name for you project.\n"
                 fi
