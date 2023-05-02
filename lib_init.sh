@@ -33,6 +33,8 @@ initializeLibrary() {
     echo "#! /bin/sh\ncd out/build; make;" >build.sh
     echo "#! /bin/sh\ncd out/build; sudo make install;" >install.sh
     echo "#! /bin/sh\ncd out/build; ctest ;" >test.sh
+    echo "#! /bin/sh\ngit submodule update --init --recursive ;" >submodule_init.sh
+    echo "#! /bin/sh\ngit submodule update --recursive --remote;" >submodule_update.sh
     echo "#! /bin/sh
 cmake -S . -B out/build;
 cd out/build; make; 

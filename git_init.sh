@@ -44,6 +44,6 @@ _deps
 #Build
 out/build/
 [Bb][Uu][Ii][Ll][Dd]/
-libs/
+libs/*
 "
 }
