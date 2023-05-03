@@ -26,7 +26,10 @@ initializeProject() {
     echo "#! /bin/sh\ncd out/build; make;" >build.sh
     echo "#! /bin/sh\ncd out/build; ./$1" >run.sh
     echo "#! /bin/sh\ncd out/build; sudo make install;" >install.sh
-    chmod +x configure.sh build.sh run.sh install.sh
+    echo "#! /bin/sh\ngit submodule update --init --recursive ;" >submodule_init.sh
+    echo "#! /bin/sh\ngit submodule update --recursive --remote;" >submodule_update.sh
+
+    chmod +x configure.sh build.sh run.sh install.sh submodule_init.sh submodule_update.sh
 
     echo ""
     echo ""

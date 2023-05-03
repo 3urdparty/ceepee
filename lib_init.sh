@@ -13,17 +13,21 @@ initializeLibrary() {
     fi
     if [ "$4" == 'true' ]; then
         mkdir -p tests
-        createBasicTest >tests/test.cpp
+        if [! -f tests/test.cpp ]; then echo createBasicTest >tests/test.cpp
+        fi
     fi
 
     echo "- Adding .gitIgnore"
     createGitIgnore >.gitignore
 
     echo "- Creating header file ${BOLD}${BLUE}$1.hpp${NORMAL}${NC}"
-    createHeaderFile $1 >include/$1/$1.hpp
+    if [! -f include/$1/$1.hpp ]; then createHeaderFile $1 >include/$1/$1.hpp
+    fi
+
 
     echo "- Creating source file ${BOLD}${BLUE}$1.cpp${NORMAL}${NC}"
-    echo "#include \"$1.hpp\"" >src/$1.cpp
+    if [! -f src/$1.cpp ]; then echo "#include \"$1.hpp\"" >src/$1.cpp
+    fi
 
     echo "- Creating CMakeLists.txt"
     createLibraryCmake $1 $2 $3 $4 >CMakeLists.txt
@@ -45,7 +49,7 @@ Running tests:
 \"
 ctest;" >build_and_run.sh
 
-    chmod +x configure.sh build.sh install.sh test.sh build_and_test.sh
+    chmod +x configure.sh build.sh install.sh test.sh build_and_test.sh submodule_init.sh submodule_update.sh
 
     echo ""
     echo ""
