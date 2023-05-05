@@ -6,7 +6,7 @@ source ~/bin/ceepee/projectCMake.sh
 
 initializeProject() {
     echo "- Creating directories"
-    mkdir -p libs src test out/build
+    mkdir -p libs src tests out/build
 
     if [ "$3" == 'true' ]; then
         mkdir docs
@@ -16,10 +16,14 @@ initializeProject() {
     createGitIgnore >.gitignore
 
     echo "- Creating project level cmake"
-    createProjectLevelCMakeLists $1 >CMakeLists.txt
-
+    if [! -f CMakeLists.txt ]; then
+        createProjectLevelCMakeLists $1 >CMakeLists.txt
+    fi
     echo "- Creating source file ${BOLD}${BLUE}$1.cpp${NORMAL}${NC}"
-    createMainFile $1 >src/main.cpp
+
+    if [! -f src/main.cpp ]; then
+        createMainFile $1 >src/main.cpp
+    fi
 
     echo "- Adding project scripts"
     echo "#! /bin/sh\ncmake -S . -B out/build;" >configure.sh

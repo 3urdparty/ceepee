@@ -13,7 +13,8 @@ initializeLibrary() {
     fi
     if [ "$4" == 'true' ]; then
         mkdir -p tests
-        if [! -f tests/test.cpp ]; then echo createBasicTest >tests/test.cpp
+        if [ ! -f tests/test.cpp ]; then
+            createBasicTest >tests/test.cpp
         fi
     fi
 
@@ -21,16 +22,19 @@ initializeLibrary() {
     createGitIgnore >.gitignore
 
     echo "- Creating header file ${BOLD}${BLUE}$1.hpp${NORMAL}${NC}"
-    if [! -f include/$1/$1.hpp ]; then createHeaderFile $1 >include/$1/$1.hpp
+    if [ ! -f include/$1/$1.hpp ]; then
+        createHeaderFile $1 >include/$1/$1.hpp
     fi
 
-
     echo "- Creating source file ${BOLD}${BLUE}$1.cpp${NORMAL}${NC}"
-    if [! -f src/$1.cpp ]; then echo "#include \"$1.hpp\"" >src/$1.cpp
+    if [ ! -f src/$1.cpp ]; then
+        echo "#include \"$1.hpp\"" >src/$1.cpp
     fi
 
     echo "- Creating CMakeLists.txt"
-    createLibraryCmake $1 $2 $3 $4 >CMakeLists.txt
+    if [ ! -f CMakeLists.txt ]; then
+        createLibraryCmake $1 $2 $3 $4 >CMakeLists.txt
+    fi
 
     echo "- Adding project scripts"
     echo "#! /bin/sh\ncmake -S . -B out/build;" >configure.sh
