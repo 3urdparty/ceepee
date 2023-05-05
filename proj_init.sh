@@ -32,8 +32,9 @@ initializeProject() {
     echo "#! /bin/sh\ncd out/build; sudo make install;" >install.sh
     echo "#! /bin/sh\ngit submodule update --init --recursive ;" >submodule_init.sh
     echo "#! /bin/sh\ngit submodule update --recursive --remote;" >submodule_update.sh
+    echo "#! /bin/sh\nrm -rf libs/*;" >clear_libs.sh
 
-    chmod +x configure.sh build.sh run.sh install.sh submodule_init.sh submodule_update.sh
+    chmod +x configure.sh build.sh run.sh install.sh submodule_init.sh submodule_update.sh chmod +x configure.sh build.sh install.sh test.sh build_and_test.sh submodule_init.sh submodule_update.sh clear_libs.sh
 
     echo ""
     echo ""
