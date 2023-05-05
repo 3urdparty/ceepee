@@ -4,6 +4,11 @@ createLibraryCmake() {
 # Library #
 ###########
 
+
+# Options
+option(TESTS "Enable tests" OFF)
+
+
 cmake_minimum_required(VERSION 3.26.0)
 set (CMAKE_CXX_STANDARD 17)
 
@@ -15,9 +20,9 @@ set(LIBRARY_NAME
 # Setting main environment variables
 set(MAIN_LIBRARIES_DIR
     libs
-)
+)"
 
-set(MAIN_LIBRARIES 
+echo "set(MAIN_LIBRARIES 
 
 )
 
@@ -72,21 +77,22 @@ set(TESTS_DIR
 set(TESTS_SOURCES
     \${TESTS_DIR}/test.cpp
 )
+
 # If TESTS option is ON
 if(TESTS)
 # Setting up GTest
-    message("Enabling tests for target")
-    message(STATUS  "Fetching GoogleTests")
+    message(\"Enabling tests for target\")
+    message(STATUS  \"Fetching GoogleTests\")
     include(FetchContent)
     FetchContent_Declare(
         googletest
         URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip)
     FetchContent_MakeAvailable(googletest)
     enable_testing()
-    message(STATUS "Enabling GoogleTest")
+    message(STATUS \"Enabling GoogleTest\")
     
     # Adding test files to target
-    message(STATUS "Adding test files to target")
+    message(STATUS \"Adding test files to target\")
     
     # Check if target already added to project
     if (TARGET \${TESTS_NAME})
@@ -96,17 +102,17 @@ if(TESTS)
         \${TESTS_SOURCES})
         
         # Linking target with GTest
-        message(STATUS "Linking library with tests and GoogleTest")
+        message(STATUS \"Linking library with tests and GoogleTest\")
         target_link_libraries(
             \${TESTS_NAME}
             GTest::gtest_main
             \${LIBRARY_NAME})
         # Final steps
-        message(STATUS "Including GoogleTest")
+        message(STATUS \"Including GoogleTest\")
         include(GoogleTest)
 
         gtest_discover_tests(\${TESTS_NAME})
-        message("")
+        message(\"\")
     endif()
 endif()
 

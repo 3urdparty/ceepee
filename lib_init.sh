@@ -33,6 +33,7 @@ initializeLibrary() {
 
     echo "- Creating CMakeLists.txt"
     if [ ! -f CMakeLists.txt ]; then
+
         createLibraryCmake $1 $2 $3 $4 >CMakeLists.txt
     fi
 
