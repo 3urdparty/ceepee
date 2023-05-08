@@ -6,7 +6,7 @@ createLibraryCmake() {
 
 
 # Options
-option(TESTS "Enable tests" OFF)
+option(TESTS \"Enable tests\" OFF)
 
 
 cmake_minimum_required(VERSION 3.26.0)
@@ -132,7 +132,7 @@ if(GIT_FOUND AND EXISTS \${PROJECT_SOURCE_DIR}/.git)
 	option(GIT_SUBMODULE \"Check submodules during build\" ON)
 	if (GIT_SUBMODULE)
 		message(STATUS \"Submodules updating\")
-		execute_process(COMMAND \${GIT_EXECUTABLE} submodule update --init --recursive
+		execute_process(COMMAND \${GIT_EXECUTABLE} submodule update --init --recursive --remote
 			WORKING_DIRECTORY \${CMAKE_CURRENT_SOURCE_DIR}
 		    RESULT_VARIABLE GIT_SUBMOD_RESULT)
 		if(NOT GIT_SUBMOD_RESULT EQUAL \"0\")

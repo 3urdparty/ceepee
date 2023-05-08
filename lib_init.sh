@@ -38,11 +38,11 @@ initializeLibrary() {
     fi
 
     echo "- Adding project scripts"
-    echo "#! /bin/sh\ncmake -S . -B out/build;" >configure.sh
-    echo "#! /bin/sh\ncd out/build; make;" >build.sh
-    echo "#! /bin/sh\ncd out/build; sudo make install;" >install.sh
-    echo "#! /bin/sh\ncd out/build; ctest ;" >test.sh
-    echo "#! /bin/sh\ngit submodule update --init --recursive ;" >submodule_init.sh
+    echo "#! /bin/sh\ncmake -S . -B out/build \$@" >configure.sh
+    echo "#! /bin/sh\ncd out/build; make; \$@" >build.sh
+    echo "#! /bin/sh\ncd out/build; sudo make install \$@" >install.sh
+    echo "#! /bin/sh\ncd out/build; ctest \$@" >test.sh
+    echo "#! /bin/sh\ngit submodule update --init --recursive --remote;" >submodule_init.sh
     echo "#! /bin/sh\ngit submodule update --recursive --remote;" >submodule_update.sh
     echo "#! /bin/sh\nrm -rf libs/*;" >clear_libs.sh
     echo "#! /bin/sh
@@ -53,7 +53,7 @@ echo \"
 Build Sucessfully!
 Running tests:
 \"
-ctest;" >build_and_run.sh
+ctest;" >build_and_test.sh
 
     chmod +x configure.sh build.sh install.sh test.sh build_and_test.sh submodule_init.sh submodule_update.sh clear_libs.sh
 
