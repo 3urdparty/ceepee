@@ -22,7 +22,7 @@ set(MAIN_LIBRARIES_DIR
     libs
 )"
 
-echo "set(MAIN_LIBRARIES 
+    echo "set(MAIN_LIBRARIES 
 
 )
 
